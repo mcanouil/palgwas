@@ -12,7 +12,12 @@ Depends:
     R (>= 3.5.0)
 Imports: 
     shiny (>= 1.4.0),
-    golem (>= 0.1)
+    golem (>= 0.1),
+    processx,
+    attempt,
+    DT,
+    glue,
+    htmltools
 Suggests:
     covr (>= 3.3.2),
     roxygen2 (>= 7.0.2),
