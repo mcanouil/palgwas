@@ -3,4 +3,4 @@
 export(asymp_gee)
 export(asymp_lmm)
 export(deploy)
-export(palgwas)
+export(go_palgwas)

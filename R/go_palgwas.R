@@ -13,10 +13,10 @@
 #' if (interactive()) {
 #'   library(palgwas)
 #'   # Must be run in an interactive R session!
-#'   palgwas()
+#'   go_palgwas()
 #' }
 #'
-palgwas <- function(
+go_palgwas <- function(
   port = getOption("shiny.port"),
   launch.browser = getOption("shiny.launch.browser", interactive()),
   host = getOption("shiny.host", "127.0.0.1"), 
