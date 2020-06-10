@@ -1,28 +1,29 @@
 Package: palgwas
 Title: Power Analysis for Longitudinal Genome-Wide Association Studies
 Version: 0.0.0.9000
-Authors@R: person(given = "Mickaël", family = "Canouil", role = c("cre", "aut"), email = "mickael.canouil@cnrs.fr", comment = c(ORCID = "0000-0002-3396-4549"))
+Authors@R: c(
+    c(person(given = "Mickaël",
+           family = "Canouil",
+           role = c("aut", "cre"),
+           email = "mickael.canouil@cnrs.fr",
+           comment = c(ORCID = "0000-0002-3396-4549")),
+      person(given = "Ghislain", family = "Rocheleau", role = "aut")
+    )
 Description: Shiny App to explore statistical power for longitudinal 
     Genome-Wide Association Studies using various parameters.
 License: GPL-3
-URL: https://github.com/mcanouil/palgwas,
-    https://mcanouil.github.io/palgwas
+URL: https://github.com/mcanouil/palgwas, https://mcanouil.github.io/palgwas
 BugReports: https://github.com/mcanouil/palgwas/issues
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
 Depends: 
     R (>= 3.5.0)
 Imports: 
     shiny (>= 1.4.0),
-    golem (>= 0.1),
-    processx,
-    attempt,
-    DT,
-    glue,
-    htmltools
+    stats
 Suggests:
     covr (>= 3.3.2),
     roxygen2 (>= 7.0.2),
     testthat (>= 2.2.1)
-Encoding: UTF-8
-LazyData: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
