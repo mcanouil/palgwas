@@ -21,10 +21,11 @@ checks\_worst](https://cranchecks.info/badges/worst/palgwas)](https://cran.r-pro
 [![CRAN\_Download\_total](https://cranlogs.r-pkg.org/badges/palgwas)](https://cran.r-project.org/package=palgwas)
 [![R build
 status](https://github.com/mcanouil/palgwas/workflows/R-CMD-check/badge.svg)](https://github.com/mcanouil/palgwas/actions)
-<!-- badges: end --> Shiny App to explore statistical power for
-longitudinal Genome-Wide Association Studies using various parameters
-and two approach, namely, Generalised Estimating Equations and Linear
-Mixed effect Model.
+<!-- badges: end -->
+
+Shiny App to explore statistical power for longitudinal Genome-Wide
+Association Studies using various parameters and two approach, namely,
+Generalised Estimating Equations and Linear Mixed effect Model.
 
 ## Installation
 
