@@ -13,7 +13,7 @@ tag](https://img.shields.io/github/tag/mcanouil/palgwas.svg?label=latest%20tag&i
 <!-- badges: end -->
 
 Shiny App to explore statistical power for longitudinal Genome-Wide
-Association Studies using various parameters and two approach, namely,
+Association Studies using various parameters and two approaches, namely,
 Generalised Estimating Equations and Linear Mixed effect Model.
 
 ## Installation
