@@ -3,11 +3,7 @@ options(encoding = "UTF-8")
 
 library(shiny)
 library(shinydashboard)
-
-library(parallel)
 library(ggplot2)
-library(grid)
-library(scales)
 
 myPalettes <- rbind(
   c(Name = "dodgerblue", Hex = "#1E90FF", RGB = "rgb(30/255, 144/255, 255/255)"),
@@ -23,7 +19,7 @@ myPalette <- myPalettes[, "Name"]
 
 asympLMM <- palgwas::asymp_lmm
 asympGEE <- palgwas::asymp_gee
-
+percent <- function(x) sprintf("%.02f%%", x * 100)
 
 ui <- dashboardPage(
   dashboardHeader(
@@ -35,16 +31,14 @@ ui <- dashboardPage(
       name = tags$span(
         tags$i(style = "color:#1995dc", icon("envelope", lib = "glyphicon")),
         "Ghislain Rocheleau"
-      ),
-      subtitle = tags$span(style = "color:#1995dc", "(Principal Investigator)")
+      )
     ),
     sidebarUserPanel(
       name = a(
         tags$i(style = "color:#1995dc", icon("envelope", lib = "glyphicon")),
         "Mickaël Canouil",
         href = "mailto:mickael.canouil@cnrs.fr"
-      ),
-      subtitle = tags$span(style = "color:#1995dc", "(Biostatistician)")
+      )
     ),
     hr(),
     sidebarMenu(
@@ -75,107 +69,107 @@ ui <- dashboardPage(
           box(
             HTML(
               '<div id="plotunits" class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
-                                <label class="control-label" for="plotunits">Unit:</label>
-                                <div class="shiny-options-group">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotunits" value="in" checked="checked"/>
-                                        <span>inch</span>
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotunits" value="cm"/>
-                                        <span>centimetre</span>
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotunits" value="mm"/>
-                                        <span>millimetre</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group shiny-input-container">
-                                <label for="plotwidth">Width:</label>
-                                <input id="plotwidth" type="number" class="form-control" value="7.5" min="1" max="100"/>
-                            </div>
-                            <div class="form-group shiny-input-container">
-                                <label for="plotheight">Height:</label>
-                                <input id="plotheight" type="number" class="form-control" value="6" min="1" max="100"/>
-                            </div>
-                            <div id="plotformat" class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
-                                <label class="control-label" for="plotformat">Format:</label>
-                                <div class="shiny-options-group">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotformat" value="jpg" checked="checked"/>
-                                        <span>jpg</span>
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotformat" value="svg"/>
-                                        <span>svg</span>
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotformat" value="tiff"/>
-                                        <span>tiff</span>
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotformat" value="eps"/>
-                                        <span>eps</span>
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotformat" value="png"/>
-                                        <span>png</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div id="plotdpi" class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
-                                <label class="control-label" for="plotdpi">Resolution:</label>
-                                <div class="shiny-options-group">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotdpi" value="150"/>
-                                        <span>150 dpi</span>
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotdpi" value="300" checked="checked"/>
-                                        <span>300 dpi</span>
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotdpi" value="600"/>
-                                        <span>600 dpi</span>
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotdpi" value="1200"/>
-                                        <span>1200 dpi</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div id="plotcolour" class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
-                                <label class="control-label" for="plotcolour">Colour:</label>
-                                <div class="shiny-options-group">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotcolour" value="Colour"/>
-                                        <span>Colour</span>
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotcolour" value="Gray" checked="checked"/>
-                                        <span>Gray</span>
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="plotcolour" value="Custom"/>
-                                        <span>Custom</span>
-                                    </label>
+                  <label class="control-label" for="plotunits">Unit:</label>
+                  <div class="shiny-options-group">
+                      <label class="radio-inline">
+                          <input type="radio" name="plotunits" value="in" checked="checked"/>
+                          <span>inch</span>
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="plotunits" value="cm"/>
+                          <span>centimetre</span>
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="plotunits" value="mm"/>
+                          <span>millimetre</span>
+                      </label>
+                  </div>
+              </div>
+              <div class="form-group shiny-input-container">
+                  <label for="plotwidth">Width:</label>
+                  <input id="plotwidth" type="number" class="form-control" value="7.5" min="1" max="100"/>
+              </div>
+              <div class="form-group shiny-input-container">
+                  <label for="plotheight">Height:</label>
+                  <input id="plotheight" type="number" class="form-control" value="6" min="1" max="100"/>
+              </div>
+              <div id="plotformat" class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
+                  <label class="control-label" for="plotformat">Format:</label>
+                  <div class="shiny-options-group">
+                      <label class="radio-inline">
+                          <input type="radio" name="plotformat" value="jpg" checked="checked"/>
+                          <span>jpg</span>
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="plotformat" value="svg"/>
+                          <span>svg</span>
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="plotformat" value="tiff"/>
+                          <span>tiff</span>
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="plotformat" value="eps"/>
+                          <span>eps</span>
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="plotformat" value="png"/>
+                          <span>png</span>
+                      </label>
+                  </div>
+              </div>
+              <div id="plotdpi" class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
+                  <label class="control-label" for="plotdpi">Resolution:</label>
+                  <div class="shiny-options-group">
+                      <label class="radio-inline">
+                          <input type="radio" name="plotdpi" value="150"/>
+                          <span>150 dpi</span>
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="plotdpi" value="300" checked="checked"/>
+                          <span>300 dpi</span>
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="plotdpi" value="600"/>
+                          <span>600 dpi</span>
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="plotdpi" value="1200"/>
+                          <span>1200 dpi</span>
+                      </label>
+                  </div>
+              </div>
+              <div id="plotcolour" class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
+                  <label class="control-label" for="plotcolour">Colour:</label>
+                  <div class="shiny-options-group">
+                      <label class="radio-inline">
+                          <input type="radio" name="plotcolour" value="Colour"/>
+                          <span>Colour</span>
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="plotcolour" value="Gray" checked="checked"/>
+                          <span>Gray</span>
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="plotcolour" value="Custom"/>
+                          <span>Custom</span>
+                      </label>
 
-                                </div>
-                            </div>
-                             <div id="reportstars" class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
-                                <label class="control-label" for="reportstars">Significativity Stars:</label>
-                                <div class="shiny-options-group">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="reportstars" value="TRUE" checked="checked"/>
-                                        <span>Yes</span>
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="reportstars" value="FALSE"/>
-                                        <span>No</span>
-                                    </label>
-                                </div>
-                            </div>'
+                  </div>
+              </div>
+                <div id="reportstars" class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
+                  <label class="control-label" for="reportstars">Significativity Stars:</label>
+                  <div class="shiny-options-group">
+                      <label class="radio-inline">
+                          <input type="radio" name="reportstars" value="TRUE" checked="checked"/>
+                          <span>Yes</span>
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="reportstars" value="FALSE"/>
+                          <span>No</span>
+                      </label>
+                  </div>
+              </div>'
             ),
             width = 6,
             collapsible = FALSE,
