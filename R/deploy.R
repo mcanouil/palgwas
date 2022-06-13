@@ -1,5 +1,5 @@
 #' Deploy the Shiny App
-#' 
+#'
 #' @description Deploy (copy) the shiny application to the specified directory
 #'
 #' @param directory [[character]] A character vector of one path to the new location.
@@ -18,11 +18,9 @@
 #'
 deploy <- function(directory = "/srv/shiny-server", app_name = "palgwas") {
   dir.create(file.path(directory, app_name), showWarnings = FALSE, recursive = TRUE)
-  out <- all(file.copy(
+  all(file.copy(
     from = list.files(system.file("app", package = "palgwas"), full.names = TRUE),
     to = file.path(directory, app_name),
     overwrite = TRUE, recursive = TRUE
   ))
-
-  out
 }

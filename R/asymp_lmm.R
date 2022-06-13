@@ -10,7 +10,7 @@
 #'
 #' @return numeric.
 #' @export
-#' 
+#'
 asymp_lmm <- function(n = 1000, p = 0.3, m = 4, delta = 3, sig2 = 0.08, sig2_b1 = 0.0008, d = 0.005) {
   ## To compare empirical with theoretical power estimation for testing H1:Beta3 = d
   # A <- (12 * sig2) / (delta^2 * m * (m^2-1)) + sig2_b1
