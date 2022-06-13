@@ -32,14 +32,14 @@ library("palgwas")
 go_palgwas()
 ```
 
+------------------------------------------------------------------------
+
 ## Getting help
 
 If you encounter a clear bug, please file a minimal reproducible example
 on [GitHub](https://github.com/mcanouil/palgwas/issues).  
 For questions and other discussion, please open a discussion on
 [GitHub](https://github.com/mcanouil/palgwas/discussions).
-
-------------------------------------------------------------------------
 
 ## Code of Conduct
 
