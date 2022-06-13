@@ -7,12 +7,11 @@ Authors@R:
            role = c("aut", "cre"),
            email = "mickael.canouil@cnrs.fr",
            comment = c(ORCID = "0000-0002-3396-4549")),
-      person(given = "Ghislain", family = "Rocheleau", role = "aut")
-    )
+      person(given = "Ghislain", family = "Rocheleau", role = "aut"))
 Description: Shiny App to explore statistical power for longitudinal 
     Genome-Wide Association Studies using various parameters and two approach, namely,
     Generalised Estimating Equations and Linear Mixed effect Model.
-License: GPL-3
+License: MIT + file LICENSE
 URL: https://github.com/mcanouil/palgwas
 BugReports: https://github.com/mcanouil/palgwas/issues
 Encoding: UTF-8
@@ -27,4 +26,9 @@ Imports:
 Suggests:
     covr (>= 3.5.0),
     roxygen2 (>= 7.1.0),
-    testthat (>= 2.3.2)
+    testthat (>= 2.3.2),
+    grid,
+    parallel,
+    shinydashboard (>= 0.7.2),
+    ggplot2 (>= 3.3.6),
+    scales (>= 1.2.0)

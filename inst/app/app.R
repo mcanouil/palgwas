@@ -32,11 +32,18 @@ ui <- dashboardPage(
   ),
   dashboardSidebar(
     sidebarUserPanel(
-      name = a(tags$i(style = "color:#1995dc", icon("envelope", lib = "glyphicon")), "Ghislain Rocheleau", href = "mailto:ghislain.rocheleau@cnrs.fr"),
+      name = tags$span(
+        tags$i(style = "color:#1995dc", icon("envelope", lib = "glyphicon")),
+        "Ghislain Rocheleau"
+      ),
       subtitle = tags$span(style = "color:#1995dc", "(Principal Investigator)")
     ),
     sidebarUserPanel(
-      name = a(tags$i(style = "color:#1995dc", icon("envelope", lib = "glyphicon")), "Mickaël Canouil", href = "mailto:mickael.canouil@cnrs.fr"),
+      name = a(
+        tags$i(style = "color:#1995dc", icon("envelope", lib = "glyphicon")),
+        "Mickaël Canouil",
+        href = "mailto:mickael.canouil@cnrs.fr"
+      ),
       subtitle = tags$span(style = "color:#1995dc", "(Biostatistician)")
     ),
     hr(),
@@ -186,13 +193,43 @@ ui <- dashboardPage(
           box(
             column(
               6,
-              sliderInput("n", label = strong("Population size: \\( n \\)"), min = 500, max = 10000, value = 1000, step = 500, animate = animationOptions(interval = 300, loop = TRUE)),
-              sliderInput("p", label = strong("Minor Allele Frequency: \\( p \\)"), min = 0, max = 0.5, step = 0.05, value = 0.3, animate = animationOptions(interval = 300, loop = TRUE)),
-              sliderInput("m", label = strong("Number of measures: \\( m \\)"), min = 2, max = 15, value = 4, animate = animationOptions(interval = 300, loop = TRUE))
+              sliderInput(
+                inputId = "n",
+                label = strong("Population size: \\( n \\)"),
+                min = 500,
+                max = 10000,
+                value = 1000,
+                step = 500,
+                animate = animationOptions(interval = 300, loop = TRUE)
+              ),
+              sliderInput(
+                inputId = "p",
+                label = strong("Minor Allele Frequency: \\( p \\)"),
+                min = 0,
+                max = 0.5,
+                step = 0.05,
+                value = 0.3,
+                animate = animationOptions(interval = 300, loop = TRUE)
+              ),
+              sliderInput(
+                inputId = "m",
+                label = strong("Number of measures: \\( m \\)"),
+                min = 2,
+                max = 15,
+                value = 4,
+                animate = animationOptions(interval = 300, loop = TRUE)
+              )
             ),
             column(
               6,
-              sliderInput("delta", label = strong("Time between two measures: \\( \\delta \\)"), min = 1, max = 15, value = 3, animate = animationOptions(interval = 300, loop = TRUE)),
+              sliderInput(
+                inputId = "delta",
+                label = strong("Time between two measures: \\( \\delta \\)"),
+                min = 1,
+                max = 15,
+                value = 3,
+                animate = animationOptions(interval = 300, loop = TRUE)
+              ),
               sliderInput("beta3", label = strong("Interaction effect: \\( \\beta_{3} \\)"), min = 0, max = 1e-2, step = 5e-4, value = 5e-3, sep = "", animate = animationOptions(interval = 300, loop = TRUE))
             ),
             width = 12,
@@ -238,14 +275,14 @@ ui <- dashboardPage(
               ),
               column(
                 2,
-                HTML(
-                  '<div style="text-align:center; margin-top:10px">
-                                        <a id="plot.download" class="btn btn-default shiny-download-link " href="" target="_blank">
-                                            <i class="fa fa-download" style="text-align:center"></i>
-                                            Download
-                                        </a>
-                                    </div>'
-                )
+                HTML(paste0(
+                  '<div style="text-align:center; margin-top:10px">',
+                  '<a id="plot.download" class="btn btn-default shiny-download-link " href="" target="_blank">',
+                  '<i class="fa fa-download" style="text-align:center"></i>',
+                  'Download',
+                  '</a>',
+                  '</div>'
+                ))
               )
             ),
             plotOutput("plot"),
@@ -355,7 +392,8 @@ server <- function(input, output, session) {
           }
         )
         dta <- data.frame(do.call("rbind", asympPower))
-        ggplot(data = dta, aes(x = x, y = y)) + theme_minimal(base_size = 16) +
+        ggplot(data = dta, aes(x = x, y = y)) +
+          theme_minimal(base_size = 16) +
           geom_line(colour = "dodgerblue", linetype = 1) +
           geom_point(colour = "dodgerblue", shape = 1) +
           labs(x = labx, y = "Power") +
@@ -457,7 +495,8 @@ server <- function(input, output, session) {
           }
         )
         dta <- data.frame(do.call("rbind", asympPower))
-        ggplot(data = dta, aes(x = x, y = y)) + theme_minimal(base_size = 16) +
+        ggplot(data = dta, aes(x = x, y = y)) +
+          theme_minimal(base_size = 16) +
           geom_line(colour = "dodgerblue", linetype = 1) +
           geom_point(colour = "dodgerblue", shape = 1) +
           labs(x = labx, y = "Power") +
@@ -473,7 +512,14 @@ server <- function(input, output, session) {
       paste0("Power.", input$plotformat)
     },
     content = function(file) {
-      ggsave(file = file, plot = plot.data(), width = input$plotwidth, height = input$plotheight, units = input$plotunits, dpi = as.numeric(input$plotdpi))
+      ggsave(
+        file = file,
+        plot = plot.data(),
+        width = input$plotwidth,
+        height = input$plotheight,
+        units = input$plotunits,
+        dpi = as.numeric(input$plotdpi)
+      )
     }
   )
 }

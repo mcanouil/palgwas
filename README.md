@@ -6,17 +6,10 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![GitHub
 tag](https://img.shields.io/github/tag/mcanouil/palgwas.svg?label=latest%20tag&include_prereleases)](https://github.com/mcanouil/palgwas)
-[![Coverage Status
-(codecov)](https://codecov.io/gh/mcanouil/palgwas/branch/master/graph/badge.svg)](https://codecov.io/gh/mcanouil/palgwas)
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version-ago/palgwas)](https://cran.r-project.org/package=palgwas)
-[![cran
-checks\_worst](https://cranchecks.info/badges/worst/palgwas)](https://cran.r-project.org/web/checks/check_results_palgwas.html)
-[![CRAN\_Download\_total](https://cranlogs.r-pkg.org/badges/palgwas)](https://cran.r-project.org/package=palgwas)
-[![R build
-status](https://github.com/mcanouil/palgwas/workflows/R-CMD-check/badge.svg)](https://github.com/mcanouil/palgwas/actions)
+[![R-CMD-check](https://github.com/mcanouil/palgwas/actions/workflows/check-pak.yaml/badge.svg?branch=main)](https://github.com/mcanouil/palgwas/actions/workflows/check-pak.yaml)
 <!-- badges: end -->
 
 Shiny App to explore statistical power for longitudinal Genome-Wide
@@ -42,13 +35,15 @@ go_palgwas()
 ## Getting help
 
 If you encounter a clear bug, please file a minimal reproducible example
-on [github](https://github.com/mcanouil/palgwas/issues).  
-For questions and other discussion, please contact the package
-maintainer.
+on [GitHub](https://github.com/mcanouil/palgwas/issues).  
+For questions and other discussion, please open a discussion on
+[GitHub](https://github.com/mcanouil/palgwas/discussions).
 
------
+------------------------------------------------------------------------
 
-Please note that the palgwas project is released with a [Contributor
+## Code of Conduct
+
+Please note that the `eggla` project is released with a [Contributor
 Code of
-Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).  
 By contributing to this project, you agree to abide by its terms.
